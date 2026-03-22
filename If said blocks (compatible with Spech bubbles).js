@@ -3,9 +3,6 @@
   if (!Scratch.extensions.unsandboxed) throw new Error("Speech Bubbles If Said must run unsandboxed");
  
   const runtime = Scratch.vm.runtime;
- 
-  // Liest den aktuellen Bubble-Text eines Sprites direkt aus dem DOM,
-  // genau so wie SharkPool's Speech Bubbles Extension ihn speichert.
   function makeEncodedID(id) {
     if (id === undefined) return undefined;
     try {
@@ -22,7 +19,6 @@
       `div[id="SP_Speech-Ext-${encodedId}"] div[id="text-ID"]`
     );
     if (!el) return "";
-    // .innerText gibt den sichtbaren Text zurück (wandelt <br> in \n um)
     return el.innerText ?? el.textContent ?? "";
   }
  
@@ -99,8 +95,6 @@
       }
       return spriteNames.length > 0 ? spriteNames : [""];
     }
- 
-    // Gibt die Target-ID zurück – genau wie SharkPool's getTargetId()
     resolveTarget(sprite, util) {
       if (sprite === "_myself_") return util.target.id;
       const byId = runtime.getTargetById(sprite);
